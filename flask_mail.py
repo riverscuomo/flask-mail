@@ -361,7 +361,8 @@ class Message(object):
 
         SPACES = re.compile(r'[\s]+', re.UNICODE)
         for attachment in attachments:
-            f = MIMEBase(*attachment.content_type.split('/'))
+            maintype, subtype = attachment.content_type.split('/')
+            f = MIMEBase(maintype, subtype)
             f.set_payload(attachment.data)
             encode_base64(f)
 
